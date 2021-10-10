@@ -16,12 +16,10 @@ public class InventoryStocks {
         return itemsSection;
     }
 
-    //A1, B1 , C1, ETC
     public String getItemsNames() {
         return itemsNames;
     }
 
-    //CRISPY CHIPS
     public double getItemsPrice() {
         return itemsPrice;
     }
@@ -44,21 +42,22 @@ public class InventoryStocks {
 
     }
 
-    public double purchaseItem() {
+    public String purchaseItem() {
         quantityLeft--;
-        return itemsPrice;
+        return getItemsNames() + " $" + getItemsPrice() +
+                "\n" + getDisplayMessage();
     }
 
     public String getDisplayMessage() {
         String displayMessage = "";
         if (itemsTypes.equals("Chip")) {
-            displayMessage = "Crunch Crunch, Yum!";
+            displayMessage = "Crunch Crunch, Yum! Please enjoy your snack!";
         } else if (itemsTypes.equals("Candy")) {
-            displayMessage = "Munch Munch, Yum!";
-        } else if (itemsTypes.equals("Drink")) {
-            displayMessage = "Glug Glug, Yum!";
+            displayMessage = "Munch Munch, Yum! Please enjoy your snack!";
+        } else if (itemsTypes.equals("Drink ")) {
+            displayMessage = "Glug Glug, Yum! Please enjoy your drink!";
         } else if (itemsTypes.equals("Gum")) {
-            displayMessage = "Chew Chew, Yum!";
+            displayMessage = "Chew Chew, Yum! Please enjoy your gum!";
         }
         return displayMessage;
     }

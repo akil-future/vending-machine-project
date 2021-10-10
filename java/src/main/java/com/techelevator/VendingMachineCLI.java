@@ -27,7 +27,7 @@ public class VendingMachineCLI {
 	Scanner userInput= new Scanner(System.in);
 	private Menu menu;
 	VendingMachine vendingMachine = new VendingMachine();
-	//InventoryStocks inventoryStocks = new InventoryStocks();
+	InventoryStocks inventoryStocks = new InventoryStocks();
 
 
 	public VendingMachineCLI(Menu menu) throws FileNotFoundException {
@@ -70,14 +70,14 @@ public class VendingMachineCLI {
 				String choice= (String)menu.getChoiceFromOptions(PURCHASE_MENU_OPTIONS);
 
 				if(choice.equals(PURCHASE_MENU_OPTION_FEED_MONEY)) {
-					System.out.println("This machine only accepts $1 | $2 | $5 | $10");
-					System.out.print("Please enter a valid dollar amount: $");
+					System.out.println("\nThis machine only accepts $1 | $2 | $5 | $10");
+					System.out.print("\nPlease enter a valid dollar amount: $");
            			int money= Integer.parseInt(userInput.nextLine());
 					System.out.println(vendingMachine.feedMoney(money));
 
 				} else if(choice.equals(PURCHASE_MENU_OPTION_SELECT_PRODUCT)) {
 					displayItems();
-					System.out.println("Please choose the items you need!");
+					System.out.println("\nPlease choose the items you need!");
 					String selectedItems = userInput.nextLine();
 					while(!vendingMachine.isValidKeys(selectedItems)) {
 						System.out.println("Invalid key. Try again.");
@@ -88,11 +88,11 @@ public class VendingMachineCLI {
 							System.out.println("Item does not exist.");
 						} else {
 							if (item.getQuantityLeft() > 0) {
-								System.out.println("Item is available.");
-								System.out.println(vendingMachine.dispenseItems(selectedItems));
+								System.out.println("\nItem is available.");
 								if(vendingMachine.getCurrentBalance().compareTo(new BigDecimal(item.getItemsPrice()))
 										>= 0) {
-									double purchasePrice = item.purchaseItem();
+									double purchasePrice =item.getItemsPrice();
+									System.out.println(item.purchaseItem());
 									vendingMachine.printLog(item.getItemsNames()+ " " +
 											item.getItemsSection(), new BigDecimal(item.getItemsPrice()).negate());
 									vendingMachine.setCurrentBalance
@@ -108,7 +108,9 @@ public class VendingMachineCLI {
 					}
 
 				}else if(choice.equals(PURCHASE_MENU_OPTION_FINISH_TRANSACTION)) {
-					System.out.println(vendingMachine.getChange());
+					System.out.println("\n "+ vendingMachine.getChange());
+
+					System.out.println("\nHave a nice day. Please come back soon!");
 					break;
 				}
 			}

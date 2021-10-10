@@ -1,8 +1,4 @@
 package com.techelevator.view;
-
-import com.techelevator.VendingMachineCLI;
-
-import javax.print.DocFlavor;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -74,16 +70,6 @@ public class VendingMachine {
         return isValid;
     }
 
-    public String dispenseItems(String slotId) {
-        String dispensedItem = " ";
-        for (InventoryStocks items : priceItems) {
-            if (items.getItemsSection().equals(slotId)) {
-                dispensedItem = items.getItemsNames() + " " + items.getItemsPrice() +
-                        "\n" + items.getDisplayMessage();
-            }
-        }
-        return dispensedItem;
-    }
 
     public BigDecimal feedMoney(Integer validMoney) {
         BigDecimal bigDecimal = BigDecimal.valueOf(validMoney);
@@ -92,7 +78,7 @@ public class VendingMachine {
             currentBalance = currentBalance.add(bigDecimal);
             printLog("Feed Money", BigDecimal.valueOf(validMoney));
         }else {
-            System.out.println("Sorry, you've entered an invalid $ amount.");
+            System.out.println("\nSorry, you've entered an invalid $ amount.");
         }
         return currentBalance;
     }
